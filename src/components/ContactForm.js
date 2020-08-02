@@ -8,23 +8,32 @@ const ContactForm = () => {
 	})
 	const onSubmit = data => {
 		setData(data)
+		register(data)
+	}
+
+	const logger = e => {
+		let data = e.target
+		console.log(`data in ContactForm: ${data}`)
 	}
 
 	return (
 		<div className='App'>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form
+				className='contact-form'
+				data-testid='contactForm'
+				onChange={logger}
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<div data-testid='FNInput'>
 					<label htmlFor='firstName'>First Name*</label>
-					<input name='firstName' placeholder='First Name' ref={register({ required: true, maxLength: 3 })} />
+					<input name='firstName' placeholder='First Name' ref={register({ required: true })} />
 					{errors.firstName && <p>Looks like there was an error. Error Type: {errors.firstName.type}</p>}
 				</div>
-
 				<div data-testid='lnInput'>
 					<label htmlFor='lastName'>Last Name*</label>
 					<input name='lastName' placeholder='Last Name' ref={register({ required: true })} />
 					{errors.lastName && <p>Looks like there was an error. Error Type: {errors.lastName.type}</p>}
 				</div>
-
 				<div data-testid='eInput'>
 					<label htmlFor='email'>Email*</label>
 					<input name='email' placeholder='email@somesite.com' ref={register({ required: true })} />
@@ -34,8 +43,18 @@ const ContactForm = () => {
 					<label htmlFor='message'>Message</label>
 					<textarea name='message' ref={register({ required: false })} />
 				</div>
-				{data && <pre style={{ textAlign: 'left', color: 'white' }}>{JSON.stringify(data, null, 2)}</pre>}
-				<input type='submit' data-testid='sBtn' />
+				{data && (
+					<pre className='data-display'>
+						<h3>Here is the submitted data:</h3>
+						{JSON.stringify(data, null, 2)}
+					</pre>
+				)}
+				<button type='submit' data-testid='sBtn' className='btn'>
+					SUBMIT FORM
+				</button>
+				<button data-testid='rBtn' className='btn' onClick={reset}>
+					RESET FORM
+				</button>
 			</form>
 		</div>
 	)

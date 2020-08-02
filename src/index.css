@@ -1,133 +1,178 @@
 body {
-  background: #0e101c;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	background: #0e101c;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-form {
-  max-width: 500px;
-  margin: 0 auto;
+.contact-form {
+	display: flex;
+	flex-flow: column nowrap;
+	width: auto;
+	align-items: center;
+}
+
+@media screen and (max-width: 450px) {
+	.contact-form {
+		max-width: 100vw;
+	} 
 }
 
 h1 {
-  font-weight: 100;
-  color: white;
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgb(79, 98, 148);
+	font-weight: 100;
+	color: white;
+	text-align: center;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgb(79, 98, 148);
+	width: 700px;
+	line-height: 4.5rem;
+	align-self: center;
 }
 
-.form {
-  background: #0e101c;
-  max-width: 400px;
-  margin: 0 auto;
+@media screen and (max-width: 450px) {
+	.app-h1 {
+		font-size: 2em;
+		margin: 0;
+		width: 100vw;
+		align-self: center;
+	}
 }
 
 p {
-  color: #bf1650;
+	color: #bf1650;
 }
 
 p::before {
-  display: inline;
-  content: "⚠ ";
+	display: inline;
+	content: "⚠ ";
 }
 
 input,
 textarea {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid white;
+	display: block;
+	box-sizing: border-box;
+min-width: 60vw;
+/* max-width: 90vw; */
+border-radius: 4px;
+	border: 1px solid white;
   padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
+  margin: 1rem auto;
+	font-size: 14px;
 }
 
 label {
-  line-height: 2;
-  text-align: left;
+	line-height: 2;
+	text-align: left;
   display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-  color: white;
-  font-size: 14px;
-  font-weight: 200;
+  margin: 20px 3.5rem 13px 3.5rem;
+	color: white;
+	font-size: 14px;
+	font-weight: 200;
 }
 
 button[type="submit"],
-input[type="submit"] {
-  background: #ec5990;
-  color: white;
+input[type="submit"],
+.btn {
+	background: #ec5990;
+  width: 300px;
+  color: #000;
   text-transform: uppercase;
-  border: none;
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 16px;
-  font-weight: 100;
-  letter-spacing: 10px;
+  font-size: 17px;
+	border: none;
+	margin-top: 40px;
+	height: 70px;
+	font-weight: 700;
+	letter-spacing: 10px;
 }
 
-button[type="submit"]:hover,
-input[type="submit"]:hover {
-  background: #bf1650;
+button:hover,
+input[type='submit']:hover {
+	background: #bf1650;
 }
 
 button[type="submit"]:active,
 input[type="button"]:active,
 input[type="submit"]:active {
-  transition: 0.3s all;
-  transform: translateY(3px);
-  border: 1px solid transparent;
-  opacity: 0.8;
+	transition: 0.3s all;
+	transform: translateY(3px);
+	border: 1px solid transparent;
+	opacity: 0.8;
 }
 
 input:disabled {
-  opacity: 0.4;
+	opacity: 0.4;
 }
 
 input[type="button"]:hover {
-  transition: 0.3s all;
+	transition: 0.3s all;
 }
 
 button[type="submit"],
 input[type="button"],
 input[type="submit"] {
-  -webkit-appearance: none;
+	-webkit-appearance: none;
 }
 
+@media screen and (max-width: 450px) {
+	input,
+	textarea {
+    width: 75vw;
+    margin: 0 3rem;
+	}
+
+	button[type="submit"],
+  input[type="submit"],
+  .btn {
+		width: 100vw;
+		color: white;
+		text-transform: uppercase;
+		font-size: 16px;
+		background: #ec5990;
+		width: 300px;
+		border: none;
+		margin-top: 40px;
+		height: 60px;
+		font-weight: 100;
+		letter-spacing: 10px;
+	}
+}
 .App {
-  max-width: 600px;
-  margin: 0 auto;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+  justify-content: center;
+width: auto;
+height: auto;
 }
 
-button[type="button"] {
-  display: block;
-  appearance: none;
-  background: #333;
-  color: white;
-  border: none;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
+@media screen and (max-width: 450px) {
+  .App {
+    width: 80vw;
+	}
 }
 
 pre {
-  color: white;
+	color: white;
+}
+
+.data-display {
+	text-align: left;
+	color: white;
+	border: 2px solid white;
+	border-radius: 10px; 
+	padding: 1.5rem;
+}
+
+.data-display h3 {
+	margin: 0;
+	font-weight: normal;
+
 }
 
 hr {
-  margin-top: 30px;
-}
-
-button {
-  display: block;
-  appearance: none;
-  margin-top: 40px;
-  border: 1px solid #333;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
+	margin-top: 30px;
 }
