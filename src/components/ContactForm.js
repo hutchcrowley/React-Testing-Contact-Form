@@ -1,11 +1,8 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import axios from 'axios'
 
 const ContactForm = () => {
-	const [ data, setData ] = useState({})
-
-	const [ response, setResponse ] = useState(null)
+	const [ data, setData ] = useState(null)
 
 	const { register, errors, handleSubmit, reset } = useForm({
 		mode: 'onBlur',
@@ -13,15 +10,6 @@ const ContactForm = () => {
 
 	const onSubmit = values => {
 		setData(values)
-		axios
-			.post('https://reqres.in/api/users', data)
-			.then(console.log(`data in useEffect: ${data}`))
-			.then(res => {
-				setResponse(res.data)
-			})
-			.catch(err => {
-				setResponse(err.message)
-			})
 	}
 
 	return (
@@ -34,10 +22,12 @@ const ContactForm = () => {
 						placeholder='First Name'
 						ref={register({
 							required: true,
-							minLength: { value: 4, message: 'ERROR: first name shoud be at least 4 chars.' },
+							minLength: 4,
 						})}
 					/>
-					{errors.firstName && <p> {errors.firstName.message}</p>}
+					{errors.firstName && errors.firstName.type === 'required' && <p>This is required</p>}
+					{errors.firstName &&
+					errors.firstName.type === 'minLength' && <p>first name shoud be at least 4 chars</p>}
 				</div>
 				<div data-testid='lnInput'>
 					<label htmlFor='lastName'>Last Name*</label>
@@ -46,10 +36,12 @@ const ContactForm = () => {
 						placeholder='Last Name'
 						ref={register({
 							required: true,
-							minLength: { value: 4, message: 'ERROR: last name should be at least 4 chars.' },
+							minLength: 6,
 						})}
 					/>
-					{errors.lastName && <p>{errors.lastName.message}</p>}
+					{errors.lastName && errors.lastName.type === 'required' && <p>This is required</p>}
+					{errors.lastName &&
+					errors.lastName.type === 'minLength' && <p>last name shoud be at least 6 chars</p>}
 				</div>
 				<div data-testid='emailInput'>
 					<label htmlFor='email'>Email*</label>
@@ -59,23 +51,20 @@ const ContactForm = () => {
 						type='email'
 						ref={register({
 							required: true,
-							minLength: {
-								value: 15,
-								message: 'Entered value does not match email pattern',
-							},
+							pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
 						})}
 					/>
-					{errors.email && <p>{errors.email.message}</p>}
+					{errors.email && errors.email.type === 'required' && <p>This is required</p>}
+					{errors.email && errors.email.type === 'pattern' && <p>email does not match email pattern</p>}
 				</div>
 				<div data-testid='mInput'>
 					<label htmlFor='message'>Message</label>
 					<textarea name='message' ref={register({ required: false })} />
 				</div>
-				{response && (
+				{data && (
 					<pre className='data-display'>
-						{JSON.stringify(data, null, 2)}
 						<h3>Here is the submitted data:</h3>
-						{JSON.stringify(response, null, 2)}
+						{JSON.stringify(data, null, 2)}
 					</pre>
 				)}
 				<button type='submit' data-testid='sBtn' className='btn'>
