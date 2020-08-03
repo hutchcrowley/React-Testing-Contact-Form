@@ -12,12 +12,18 @@ const ContactForm = () => {
 		setData(values)
 	}
 
+	const handleReset = values => {
+		reset(values)
+		setData(null)
+	}
+
 	return (
 		<div className='App'>
 			<form className='contact-form' data-testid='contactForm' onSubmit={handleSubmit(onSubmit)}>
 				<div data-testid='FNInput'>
 					<label htmlFor='firstName'>First Name*</label>
 					<input
+						type='text'
 						name='firstName'
 						placeholder='First Name'
 						ref={register({
@@ -25,13 +31,23 @@ const ContactForm = () => {
 							minLength: 4,
 						})}
 					/>
-					{errors.firstName && errors.firstName.type === 'required' && <p>This is required</p>}
 					{errors.firstName &&
-					errors.firstName.type === 'minLength' && <p>first name shoud be at least 4 chars</p>}
+					errors.firstName.type === 'required' && (
+						<span role='alert' className='errors'>
+							<p>This is required</p>
+						</span>
+					)}
+					{errors.firstName &&
+					errors.firstName.type === 'minLength' && (
+						<span role='alert' className='errors'>
+							<p>first name shoud be at least 4 chars</p>
+						</span>
+					)}
 				</div>
 				<div data-testid='lnInput'>
 					<label htmlFor='lastName'>Last Name*</label>
 					<input
+						type='text'
 						name='lastName'
 						placeholder='Last Name'
 						ref={register({
@@ -39,23 +55,42 @@ const ContactForm = () => {
 							minLength: 6,
 						})}
 					/>
-					{errors.lastName && errors.lastName.type === 'required' && <p>This is required</p>}
 					{errors.lastName &&
-					errors.lastName.type === 'minLength' && <p>last name shoud be at least 6 chars</p>}
+					errors.lastName.type === 'required' && (
+						<span role='alert' className='errors'>
+							<p>This is required</p>
+						</span>
+					)}
+					{errors.lastName &&
+					errors.lastName.type === 'minLength' && (
+						<span role='alert' className='errors'>
+							<p>last name shoud be at least 6 chars</p>
+						</span>
+					)}
 				</div>
 				<div data-testid='emailInput'>
 					<label htmlFor='email'>Email*</label>
 					<input
+						type='email'
 						name='email'
 						placeholder='email@somesite.com'
-						type='email'
 						ref={register({
 							required: true,
-							pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
+							pattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/,
 						})}
 					/>
-					{errors.email && errors.email.type === 'required' && <p>This is required</p>}
-					{errors.email && errors.email.type === 'pattern' && <p>email does not match email pattern</p>}
+					{errors.email &&
+					errors.email.type === 'required' && (
+						<span role='alert' className='errors'>
+							<p>This is required</p>
+						</span>
+					)}
+					{errors.email &&
+					errors.email.type === 'pattern' && (
+						<span role='alert' className='errors'>
+							<p>email does not match email pattern</p>
+						</span>
+					)}
 				</div>
 				<div data-testid='mInput'>
 					<label htmlFor='message'>Message</label>
@@ -67,12 +102,12 @@ const ContactForm = () => {
 						{JSON.stringify(data, null, 2)}
 					</pre>
 				)}
-				<button type='submit' data-testid='sBtn' className='btn'>
-					SUBMIT FORM
-				</button>
-				<button data-testid='rBtn' className='btn' onClick={reset}>
-					RESET FORM
-				</button>
+				<input type='submit' data-testid='sBtn' className='btn' />
+				{/* SUBMIT FORM
+				</input> */}
+				<input type='reset' data-testid='rBtn' className='btn' onClick={handleReset} />
+				{/* RESET FORM
+				</input> */}
 			</form>
 		</div>
 	)

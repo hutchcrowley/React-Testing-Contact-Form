@@ -16,7 +16,8 @@ In this challenge, you will be writing tests for a contact form that has been bu
 
 As a developer, you will be writing tests for every component. As we've learned, tests are a very important part of programming. The tests you will write will help you feel confident in the code you push to production!
 
-## Pro Create a forked copy of this project.
+## Pro Create a forked copy of this project
+
 - [x] Add your team lead as collaborator on Github.
 - [x] Clone your OWN version of the repository in your terminal
 - [x] CD into the project base directory
@@ -26,7 +27,8 @@ As a developer, you will be writing tests for every component. As we've learned,
 - [x] Implement the project on your newly created `<firstName-lastName>` branch, committing changes regularly.
 - [x] Push commits: git push origin `<firstName-lastName>`.
 
-**Test Runner**
+## Test Runner
+
 - [x]  In a new terminal window, run `yarn test` or `npm run test`
 - [x] With each saved change in your editor, the test runner will re-run all the tests
 - [x] **IMPORTANT** If a test fails, use the test runner's error messages to find out why it is failing
