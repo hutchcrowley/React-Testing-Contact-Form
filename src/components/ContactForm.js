@@ -2,19 +2,13 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 const ContactForm = () => {
-	const [ data, setData ] = useState(null)
-
+	const [ data, setData ] = useState()
 	const { register, errors, handleSubmit, reset } = useForm({
 		mode: 'onBlur',
 	})
-
-	const onSubmit = values => {
-		setData(values)
-	}
-
-	const handleReset = values => {
-		reset(values)
-		setData(null)
+	const onSubmit = data => {
+		setData(data)
+		register(data)
 	}
 
 	return (
@@ -22,75 +16,29 @@ const ContactForm = () => {
 			<form className='contact-form' data-testid='contactForm' onSubmit={handleSubmit(onSubmit)}>
 				<div data-testid='FNInput'>
 					<label htmlFor='firstName'>First Name*</label>
-					<input
-						type='text'
-						name='firstName'
-						placeholder='First Name'
-						ref={register({
-							required: true,
-							minLength: 4,
-						})}
-					/>
+					<input name='firstName' placeholder='First Name' ref={register({ required: true, minLength: 4 })} />
+					{errors.firstName && errors.firstName.type === 'required' && <p>Error: this field is required.</p>}
 					{errors.firstName &&
-					errors.firstName.type === 'required' && (
-						<span role='alert' className='errors'>
-							<p>This is required</p>
-						</span>
-					)}
-					{errors.firstName &&
-					errors.firstName.type === 'minLength' && (
-						<span role='alert' className='errors'>
-							<p>first name shoud be at least 4 chars</p>
-						</span>
-					)}
+					errors.firstName.type === 'minLength' && <p>Error: use at least 4 characters.</p>}
 				</div>
 				<div data-testid='lnInput'>
 					<label htmlFor='lastName'>Last Name*</label>
-					<input
-						type='text'
-						name='lastName'
-						placeholder='Last Name'
-						ref={register({
-							required: true,
-							minLength: 6,
-						})}
-					/>
-					{errors.lastName &&
-					errors.lastName.type === 'required' && (
-						<span role='alert' className='errors'>
-							<p>This is required</p>
-						</span>
-					)}
-					{errors.lastName &&
-					errors.lastName.type === 'minLength' && (
-						<span role='alert' className='errors'>
-							<p>last name shoud be at least 6 chars</p>
-						</span>
-					)}
+					<input name='lastName' placeholder='Last Name' ref={register({ required: true, maxLength: 15 })} />
+					{errors.lastName && errors.lastName.type === 'required' && <p>Error: this field is required.</p>}
+					{errors.lastName && errors.lastName.type === 'maxLength' && <p>Error: use 15 characters max.</p>}
 				</div>
-				<div data-testid='emailInput'>
+				<div data-testid='eInput'>
 					<label htmlFor='email'>Email*</label>
 					<input
-						type='email'
 						name='email'
 						placeholder='email@somesite.com'
 						ref={register({
 							required: true,
-							pattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/,
+							pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
 						})}
 					/>
-					{errors.email &&
-					errors.email.type === 'required' && (
-						<span role='alert' className='errors'>
-							<p>This is required</p>
-						</span>
-					)}
-					{errors.email &&
-					errors.email.type === 'pattern' && (
-						<span role='alert' className='errors'>
-							<p>email does not match email pattern</p>
-						</span>
-					)}
+					{errors.email && errors.email.type === 'required' && <p>Error: this field is required.</p>}
+					{errors.email && errors.email.type === 'pattern' && <p>Error: pattern does not match email.</p>}
 				</div>
 				<div data-testid='mInput'>
 					<label htmlFor='message'>Message</label>
@@ -102,12 +50,12 @@ const ContactForm = () => {
 						{JSON.stringify(data, null, 2)}
 					</pre>
 				)}
-				<input type='submit' data-testid='sBtn' className='btn' />
-				{/* SUBMIT FORM
-				</input> */}
-				<input type='reset' data-testid='rBtn' className='btn' onClick={handleReset} />
-				{/* RESET FORM
-				</input> */}
+				<button type='submit' data-testid='sBtn' className='btn'>
+					SUBMIT FORM
+				</button>
+				<button data-testid='rBtn' className='btn' onClick={reset}>
+					RESET FORM
+				</button>
 			</form>
 		</div>
 	)
