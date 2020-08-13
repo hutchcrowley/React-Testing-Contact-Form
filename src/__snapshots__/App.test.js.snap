@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot is unchanged 1`] = `
+<div
+  class="App"
+  data-testid="app"
+>
+  <h1
+    class="app-h1"
+    data-testid="app-h1"
+  >
+    Unit-Testing React Apps
+  </h1>
+  <div
+    class="App"
+  >
+    <form
+      class="contact-form"
+      data-testid="contactForm"
+    >
+      <div
+        data-testid="FNInput"
+      >
+        <label
+          for="firstName"
+        >
+          First Name*
+        </label>
+        <input
+          name="firstName"
+          placeholder="First Name"
+        />
+      </div>
+      <div
+        data-testid="lnInput"
+      >
+        <label
+          for="lastName"
+        >
+          Last Name*
+        </label>
+        <input
+          name="lastName"
+          placeholder="Last Name"
+        />
+      </div>
+      <div
+        data-testid="eInput"
+      >
+        <label
+          for="email"
+        >
+          Email*
+        </label>
+        <input
+          name="email"
+          placeholder="email@somesite.com"
+        />
+      </div>
+      <div
+        data-testid="mInput"
+      >
+        <label
+          for="message"
+        >
+          Message
+        </label>
+        <textarea
+          name="message"
+        />
+      </div>
+      <button
+        class="btn"
+        data-testid="sBtn"
+        type="submit"
+      >
+        SUBMIT FORM
+      </button>
+      <button
+        class="btn"
+        data-testid="rBtn"
+      >
+        RESET FORM
+      </button>
+    </form>
+  </div>
+</div>
+`;

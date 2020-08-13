@@ -34,7 +34,7 @@ const ContactForm = () => {
 						placeholder='email@somesite.com'
 						ref={register({
 							required: true,
-							pattern: /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/,
+							pattern: /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/,
 						})}
 					/>
 					{errors.email && errors.email.type === 'required' && <p>Error: this field is required.</p>}
